@@ -33,15 +33,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void softDelete(Long id) {
         log.info("Soft delete employee by id={}", id);
         Employee employee = getById(id);
 
-        userService.delete(employee.getUser().getId());
+        userService.softDelete(employee.getUser().getId());
 
         employee.setDeletedAt(LocalDateTime.now());
 
         employeeRepository.save(employee);
+    }
+
+    @Override
+    @Transactional
+    public void hardDelete(Long id) {
+        log.info("Hard delete employee by id={}", id);
+        Employee employee = getById(id);
+
+        userService.hardDelete(employee.getUser().getId());
+
+        employeeRepository.delete(employee);
     }
 
     @Override

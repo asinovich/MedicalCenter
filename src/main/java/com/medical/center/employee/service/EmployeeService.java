@@ -9,7 +9,9 @@ public interface EmployeeService {
 
     Employee update(Employee employee);
 
-    void delete(Long id);
+    void softDelete(Long id);
+
+    void hardDelete(Long id);
 
     Employee getById(Long id);
 

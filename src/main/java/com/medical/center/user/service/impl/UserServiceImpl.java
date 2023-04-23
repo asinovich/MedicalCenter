@@ -1,6 +1,7 @@
 package com.medical.center.user.service.impl;
 
 import com.medical.center.base.exception.AuthorizationException;
+import com.medical.center.employee.service.EmployeeService;
 import com.medical.center.user.service.UserService;
 import com.medical.center.user.model.User;
 import com.medical.center.user.repository.UserRepository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final EmployeeService employeeService;
 
     @Override
     public User save(User user) {
@@ -32,13 +34,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void softDelete(Long id) {
         log.info("Soft delete user by id={}", id);
         User user = getById(id);
 
         user.setDeletedAt(LocalDateTime.now());
 
         userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void hardDelete(Long id) {
+        log.info("Hard delete user by id={}", id);
+        User user = getById(id);
+
+        employeeService.hardDelete(user.getEmployee().getId());
+
+        userRepository.delete(user);
     }
 
     @Override
