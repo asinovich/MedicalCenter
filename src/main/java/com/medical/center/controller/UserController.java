@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
-import com.medical.center.bean.User;
 import com.medical.center.config.StageManager;
 import com.medical.center.base.view.FxmlView;
 
@@ -53,6 +52,11 @@ import javafx.util.Callback;
 @Controller
 public class UserController implements Initializable{
 
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+
+	}
+/*
 	@FXML
     private Button btnLogout;
 	
@@ -139,7 +143,7 @@ public class UserController implements Initializable{
 
 	/**
 	 * Logout and go to the login page
-	 */
+	 *
     @FXML
     private void logout(ActionEvent event) throws IOException {
     	stageManager.switchScene(FxmlView.LOGIN);    	
@@ -177,14 +181,14 @@ public class UserController implements Initializable{
     			}
     			
     		}else{
-/*    			User user = userService.find(Long.parseLong(userId.getText()));
+    			User user = userService.find(Long.parseLong(userId.getText()));
     			user.setFirstName(getFirstName());
     			user.setLastName(getLastName());
     			user.setDob(getDob());
     			user.setGender(getGender());
     			user.setRole(getRole());
     			User updatedUser =  userService.update(user);
-    			updateAlert(updatedUser);*/
+    			updateAlert(updatedUser);
     		}
     		
     		clearFields();
@@ -287,7 +291,7 @@ public class UserController implements Initializable{
 	
 	/*
 	 *  Set All userTable column properties
-	 */
+	 *
 	private void setColumnProperties(){
 		/* Override date format in table
 		 * colDOB.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<LocalDate>() {
@@ -310,7 +314,7 @@ public class UserController implements Initializable{
 		             return null;
 		         }
 		     }
-		 }));*/
+		 }));
 		
 		colUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -380,7 +384,7 @@ public class UserController implements Initializable{
 	
 	/*
 	 *  Add All users to observable list and update table
-	 */
+	 *
 	private void loadUserDetails(){
 		userList.clear();
 		//userList.addAll(userService.findAll());
@@ -390,7 +394,7 @@ public class UserController implements Initializable{
 	
 	/*
 	 * Validations
-	 */
+	 *
 	private boolean validate(String field, String value, String pattern){
 		if(!value.isEmpty()){
 			Pattern p = Pattern.compile(pattern);
@@ -427,4 +431,5 @@ public class UserController implements Initializable{
         }
         alert.showAndWait();
 	}
+	*/
 }
