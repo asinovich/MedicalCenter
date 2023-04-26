@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PatientService {
 
-    Patient save(Patient patient);
+    Patient create(Patient patient);
 
     Patient update(Patient patient);
 

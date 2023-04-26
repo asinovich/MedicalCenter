@@ -18,7 +18,7 @@ public class PatientServiceImpl implements PatientService {
     private final PatientRepository patientRepository;
 
     @Override
-    public Patient save(Patient patient) {
+    public Patient create(Patient patient) {
         log.info("Save patient={}", patient);
         return patientRepository.save(patient);
     }

@@ -36,11 +36,6 @@ public class Patient extends BaseEntity<Long> {
     //@OneToOne(cascade = CascadeType.MERGE, mappedBy = "patient")
     //private PatientRecord patientRecords;
 
-    public Patient(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
     public String getFullName() {
         return this.lastName + " " + this.firstName;
     }

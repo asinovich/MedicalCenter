@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    Employee save(Employee employee);
+    Employee create(Employee employee);
 
     Employee update(Employee employee);
 
