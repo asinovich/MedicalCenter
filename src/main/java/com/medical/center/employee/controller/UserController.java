@@ -1,61 +1,263 @@
-package com.medical.center.controller;
+package com.medical.center.employee.controller;
 
+import com.medical.center.base.constant.ControllerConstant;
+import com.medical.center.base.controller.validation.ControllerValidation;
+import com.medical.center.base.view.FxmlView;
+import com.medical.center.config.StageManager;
+import com.medical.center.employee.model.Employee;
+import com.medical.center.user.model.User;
 import com.medical.center.user.service.UserService;
-import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Callback;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
-import com.medical.center.config.StageManager;
-import com.medical.center.base.view.FxmlView;
-
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Callback;
+
 /**
  * @author Ram Alapure
  * @since 05-04-2017
  */
 
 @Controller
-public class UserController implements Initializable{
+public class UserController implements Initializable {
 
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    private Button btnLogout;
 
-	}
+    @FXML
+    private TableColumn<User, Boolean> colEdit;
+
+    @FXML
+    private TableColumn<?, ?> colEmail;
+
+    @FXML
+    private TableColumn<?, ?> colPassword;
+
+    @FXML
+    private TableColumn<User, String> colEmployeeFullName;
+
+    @FXML
+    private TableColumn<?, ?> colUserId;
+
+    @FXML
+    private MenuItem deleteUser;
+
+    @FXML
+    private TextField email;
+
+    @FXML
+    private PasswordField password;
+
+    @FXML
+    private Button reset;
+
+    @FXML
+    private Button saveUser;
+
+
+    @FXML
+    private Label userId;
+
+    @FXML
+    private TableView<User> userTable;
+
+    @Lazy
+    @Autowired
+    private StageManager stageManager;
+
+    @Autowired
+    private UserService userService;
+
+    private ObservableList<User> userList = FXCollections.observableArrayList();
+
+    private static String EMAIL = "email";
+    private static String PASSWORD = "password";
+    @FXML
+    void exit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
+    }
+
+    @FXML
+    void reset(ActionEvent event) {
+        clearFields();
+    }
+
+    @FXML
+    void saveUser(ActionEvent event) {
+        if (StringUtils.isBlank(userId.getText())) {
+            if (ControllerValidation.validate(EMAIL, email.getText(), ControllerConstant.EMAIL_REGEX)
+                && ControllerValidation.validateSizeStringIsNotEmpty(PASSWORD, password.getText(), ControllerConstant.PASSWORD_LENGTH)) {
+
+                User user = User.builder()
+                    .email(email.getText())
+                    .password(password.getText())
+                    .build();
+
+                User newUser = userService.create(user);
+                saveAlert(newUser);
+            }
+
+        } else {
+            if (ControllerValidation.validate(EMAIL, email.getText(), ControllerConstant.EMAIL_REGEX)
+                && ControllerValidation.validateSizeStringIsNotEmpty(PASSWORD, password.getText(), ControllerConstant.PASSWORD_LENGTH)) {
+
+                User user = userService.getById(Long.parseLong(userId.getText()));
+
+                user.setEmail(email.getText());
+                user.setPassword(password.getText());
+
+                User updatedUser = userService.update(user);
+                updateAlert(updatedUser);
+            }
+        }
+
+        clearFields();
+        loadUserDetails();
+    }
+
+    @FXML
+    void deleteUser(ActionEvent event) {
+        User users = userTable.getSelectionModel().getSelectedItems().get(0);
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete selected?");
+        Optional<ButtonType> action = alert.showAndWait();
+
+		if (action.get() == ButtonType.OK) {
+			userService.hardDelete(users.getId());
+		}
+
+        loadUserDetails();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        userTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        setColumnProperties();
+        loadUserDetails();
+    }
+
+    private void setColumnProperties() {
+        colUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>(EMAIL));
+        colPassword.setCellValueFactory(new PropertyValueFactory<>(PASSWORD));
+        colEmployeeFullName.setCellValueFactory(cellData -> {
+            Employee employee = cellData.getValue().getEmployee();
+            if (employee == null) {
+                return new SimpleStringProperty(null);
+            }
+            String fullName = employee.getFullName();
+            return new SimpleStringProperty(fullName);
+        });
+        colEdit.setCellFactory(cellFactory);
+    }
+
+    Callback<TableColumn<User, Boolean>, TableCell<User, Boolean>> cellFactory =
+        new Callback<>() {
+            @Override
+            public TableCell<User, Boolean> call(final TableColumn<User, Boolean> param) {
+                final TableCell<User, Boolean> cell = new TableCell<>() {
+                    Image imgEdit = new Image(getClass().getResourceAsStream("/images/edit.png"));
+                    final Button btnEdit = new Button();
+
+                    @Override
+                    public void updateItem(Boolean check, boolean empty) {
+                        super.updateItem(check, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btnEdit.setOnAction(e -> {
+                                User user = getTableView().getItems().get(getIndex());
+                                updateUser(user);
+                            });
+
+                            btnEdit.setStyle("-fx-background-color: transparent;");
+                            ImageView iv = new ImageView();
+                            iv.setImage(imgEdit);
+                            iv.setPreserveRatio(true);
+                            iv.setSmooth(true);
+                            iv.setCache(true);
+                            btnEdit.setGraphic(iv);
+
+                            setGraphic(btnEdit);
+                            setAlignment(Pos.CENTER);
+                            setText(null);
+                        }
+                    }
+
+                    private void updateUser(User user) {
+                        userId.setText(Long.toString(user.getId()));
+                        email.setText(user.getEmail());
+                        password.setText(user.getPassword());
+                    }
+                };
+                return cell;
+            }
+        };
+
+    private void loadUserDetails() {
+        userList.clear();
+        userList.addAll(userService.getAll());
+        userTable.setItems(userList);
+    }
+
+    private void clearFields() {
+        userId.setText(null);
+        email.clear();
+        password.clear();
+    }
+
+    private void saveAlert(User user) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("User saved successfully.");
+        alert.setHeaderText(null);
+        alert.setContentText("The user with id " + user.getId() + " has been created.");
+        alert.showAndWait();
+    }
+
+    private void updateAlert(User user) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("User updated successfully.");
+        alert.setHeaderText(null);
+        alert.setContentText("The user with id " + user.getId() + " has been updated.");
+        alert.showAndWait();
+    }
+
 /*
 	@FXML
     private Button btnLogout;

@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         log.info("Hard delete user by id={}", id);
         User user = getById(id);
 
-        employeeService.hardDelete(user.getEmployee().getId());
+        //employeeService.hardDelete(user.getEmployee().getId());
 
         userRepository.delete(user);
     }
