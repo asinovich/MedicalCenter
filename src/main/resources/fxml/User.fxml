@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.employee.controller.UserController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.user.controller.UserController">
    <top>
       <MenuBar BorderPane.alignment="TOP_LEFT">
         <menus>
@@ -145,13 +145,6 @@
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
-               <contextMenu>
-                  <ContextMenu>
-                    <items>
-                      <MenuItem fx:id="deleteUser" mnemonicParsing="false" onAction="#deleteUser" text="Delete" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
             </TableView>
          </children>
       </VBox>

@@ -1,4 +1,4 @@
-package com.medical.center.employee.controller;
+package com.medical.center.user.controller;
 
 import com.medical.center.base.constant.ControllerConstant;
 import com.medical.center.base.controller.validation.ControllerValidation;
@@ -67,9 +67,6 @@ public class UserController implements Initializable {
     private TableColumn<?, ?> colUserId;
 
     @FXML
-    private MenuItem deleteUser;
-
-    @FXML
     private TextField email;
 
     @FXML
@@ -112,6 +109,7 @@ public class UserController implements Initializable {
     @FXML
     void reset(ActionEvent event) {
         clearFields();
+        loadUserDetails();
     }
 
     @FXML
@@ -147,22 +145,23 @@ public class UserController implements Initializable {
         loadUserDetails();
     }
 
-    @FXML
-    void deleteUser(ActionEvent event) {
+/*    @FXML
+    void softDeleteUser(ActionEvent event) {
         User users = userTable.getSelectionModel().getSelectedItems().get(0);
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
         alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete selected?");
+        alert.setContentText("Are you sure you want to soft delete selected?");
         Optional<ButtonType> action = alert.showAndWait();
 
 		if (action.get() == ButtonType.OK) {
-			userService.hardDelete(users.getId());
+			userService.softDelete(users.getId());
 		}
 
+        clearFields();
         loadUserDetails();
-    }
+    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
