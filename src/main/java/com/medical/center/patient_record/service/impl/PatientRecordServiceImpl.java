@@ -5,16 +5,16 @@ import com.medical.center.patient_record.repository.PatientRecordRepository;
 import com.medical.center.patient_record.service.PatientRecordService;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class PatientRecordServiceImpl implements PatientRecordService {
 
-    private final PatientRecordRepository patientRecordRepository;
+    @Autowired
+    private PatientRecordRepository patientRecordRepository;
 
     @Override
     public PatientRecord create(PatientRecord patientRecord) {

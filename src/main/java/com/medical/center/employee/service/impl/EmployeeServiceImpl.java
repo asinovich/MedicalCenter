@@ -7,17 +7,19 @@ import com.medical.center.user.service.UserService;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final EmployeeRepository employeeRepository;
-    private final UserService userService;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Employee create(Employee employee) {

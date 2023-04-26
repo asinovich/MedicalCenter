@@ -6,16 +6,16 @@ import com.medical.center.petient.service.PatientService;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class PatientServiceImpl implements PatientService {
 
-    private final PatientRepository patientRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Override
     public Patient create(Patient patient) {

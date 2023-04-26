@@ -5,6 +5,8 @@ import com.medical.center.employee.model.Employee;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -25,7 +27,8 @@ public class User extends BaseEntity<Long> {
 
     private String password;
 
-    @OneToOne(cascade = CascadeType.MERGE, mappedBy = "employee")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     @Builder

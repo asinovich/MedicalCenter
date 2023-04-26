@@ -9,16 +9,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
-    private final EmployeeService employeeService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @Override
     public User create(User user) {
