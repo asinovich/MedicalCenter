@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.employee.controller.EmployeeController">
+   <top>
+      <MenuBar BorderPane.alignment="TOP_LEFT">
+        <menus>
+          <Menu mnemonicParsing="false" text="Pages">
+            <items>
+              <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#menuItemLogout" text="Logout" />
+              <MenuItem fx:id="menuItemUsers" mnemonicParsing="false" onAction="#menuItemUsers" text="Users" />
+                  <MenuItem fx:id="menuItemEmployees" mnemonicParsing="false" onAction="#menuItemUsers" text="Employees" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Add New Patient" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" top="30.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="30.0" prefWidth="265.0">
+               <children>
+                  <Label text="Patient ID - " textFill="#f8f7f7">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="patientId">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </HBox>
+            <TextField fx:id="firstName" prefHeight="30.0" prefWidth="246.0" promptText="First Name">
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin></TextField>
+            <TextField fx:id="lastName" prefHeight="30.0" prefWidth="246.0" promptText="Last Name">
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin></TextField>
+            <DatePicker fx:id="dateOfBirth" editable="false" prefHeight="30.0" prefWidth="245.0" promptText="Date Of Birth">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </DatePicker>
+            <DatePicker fx:id="enrollmentDate" editable="false" prefHeight="30.0" prefWidth="245.0" promptText="Enrollment Date">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </DatePicker>
+            <TextField fx:id="phone" layoutX="40.0" layoutY="171.0" prefHeight="30.0" prefWidth="246.0" promptText="Phone">
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="address" prefHeight="30.0" prefWidth="246.0" promptText="Address">
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
+               <children>
+                  <Button fx:id="reset" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="savePatient" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#savePatient" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#6468b2" />
+                     </effect>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="110.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="TOP_RIGHT" prefHeight="41.0" prefWidth="640.0">
+               <children>
+                  <Button fx:id="btnRefresh" mnemonicParsing="false" onAction="#refresh" prefHeight="22.0" prefWidth="70.0" styleClass="background" text="Refresh" textFill="#fff9f9" textOverrun="CLIP">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#00000091" />
+                     </effect>
+                  </Button>
+               </children>
+            </HBox>
+            <TableView fx:id="employeeTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
+              <columns>
+                <TableColumn fx:id="colPatientd" maxWidth="700.0" prefWidth="20.0" text="ID" />
+                <TableColumn fx:id="colFirstName" maxWidth="4000.0" prefWidth="75.0" text="First Name" />
+                  <TableColumn fx:id="colLastName" maxWidth="4000.0" prefWidth="75.0" text="Last Name" />
+                  <TableColumn fx:id="colDateOfBirth" maxWidth="4000.0" prefWidth="75.0" text="Date Of Birth" />
+                  <TableColumn fx:id="colEnrollmentDate" maxWidth="4000.0" prefWidth="116.0" text="Enrollment Date" />
+                  <TableColumn fx:id="colPhone" maxWidth="6000.0" prefWidth="90.0" text="Phone" />
+                  <TableColumn fx:id="colAddress" maxWidth="3500.0" prefWidth="75.0" text="Address" />
+                  <TableColumn fx:id="colEdit" maxWidth="6000.0" prefWidth="130.0" text="Edit" />
+              </columns>
+               <VBox.margin>
+                  <Insets left="10.0" right="5.0" />
+               </VBox.margin>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem fx:id="softDeletedEmployee" mnemonicParsing="false" onAction="#softDeletedEmployee" text="Soft Delete" />
+                    </items>
+                    <items>
+                      <MenuItem fx:id="hardDeletedEmployee" mnemonicParsing="false" onAction="#hardDeletedEmployee" text="Hard Delete" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
