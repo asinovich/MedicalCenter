@@ -53,6 +53,6 @@ public class PatientRecordServiceImpl implements PatientRecordService {
     @Override
     public List<PatientRecord> getAll() {
         log.info("Get all patientRecords");
-        return patientRecordRepository.findAll();
+        return patientRecordRepository.findByDeletedAtIsNull();
     }
 }

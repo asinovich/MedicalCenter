@@ -5,6 +5,7 @@ import com.medical.center.base.enums.AppointmentType;
 import com.medical.center.base.model.BaseEntity;
 import com.medical.center.employee.model.Employee;
 import com.medical.center.patient_record.model.PatientRecord;
+import com.medical.center.room.model.Room;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -57,8 +59,8 @@ public class Appointment extends BaseEntity<Long> {
     @NotFound(action = NotFoundAction.IGNORE)
     private PatientRecord patientRecord;
 
-    //@OneToOne
-    //@JoinColumn(name = "room_id")
-    //private Room room;
+    @OneToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
 
 }
