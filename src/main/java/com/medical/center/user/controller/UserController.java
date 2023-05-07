@@ -8,14 +8,13 @@ import com.medical.center.employee.model.Employee;
 import com.medical.center.user.model.User;
 import com.medical.center.user.service.UserService;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -33,23 +32,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-/**
- * @author Ram Alapure
- * @since 05-04-2017
- */
-
 @Controller
 public class UserController implements Initializable {
 
     @FXML
-    private Button btnLogout;
+    private Button btnRefresh;
 
     @FXML
     private TableColumn<User, Boolean> colEdit;
@@ -85,6 +78,12 @@ public class UserController implements Initializable {
     @FXML
     private TableView<User> userTable;
 
+    @FXML
+    private MenuItem menuItemLogout;
+
+    @FXML
+    private MenuItem menuItemEmployees;
+
     @Lazy
     @Autowired
     private StageManager stageManager;
@@ -102,8 +101,18 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void logout(ActionEvent event) {
+    void menuItemLogout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+    }
+
+    @FXML
+    void menuItemEmployees(ActionEvent event) {
+        stageManager.switchScene(FxmlView.EMPLOYEE);
+    }
+
+    @FXML
+    void refresh(ActionEvent event) {
+        loadUserDetails();
     }
 
     @FXML

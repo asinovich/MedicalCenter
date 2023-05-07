@@ -3,13 +3,15 @@ package com.medical.center.employee.service.impl;
 import com.medical.center.employee.model.Employee;
 import com.medical.center.employee.repository.EmployeeRepository;
 import com.medical.center.employee.service.EmployeeService;
+import com.medical.center.user.model.User;
 import com.medical.center.user.service.UserService;
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.transaction.Transactional;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -22,14 +24,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     private UserService userService;
 
     @Override
+    @Transactional
     public Employee create(Employee employee) {
         log.info("Save employee={}", employee);
-        return employeeRepository.save(employee);
+
+        Employee newEmployee =  employeeRepository.save(employee);
+
+        updateUser(newEmployee);
+
+        return newEmployee;
     }
 
     @Override
     public Employee update(Employee employee) {
         log.info("Update employee={}", employee);
+        employee.setUpdatedAt(LocalDateTime.now());
         return employeeRepository.save(employee);
     }
 
@@ -50,11 +59,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void hardDelete(Long id) {
         log.info("Hard delete employee by id={}", id);
-        Employee employee = getById(id);
 
-        userService.hardDelete(employee.getUser().getId());
-
-        employeeRepository.delete(employee);
+        userService.hardDeleteByEmployeeId(id);
+        employeeRepository.delete(id);
     }
 
     @Override
@@ -66,6 +73,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> getAll() {
         log.info("Get all employees");
-        return employeeRepository.findAll();
+        return employeeRepository.findAllByDeletedAtIsNull();
+    }
+
+    private void updateUser(Employee employee) {
+        User user = employee.getUser();
+        user.setEmployee(employee);
+        userService.update(user);
     }
 }

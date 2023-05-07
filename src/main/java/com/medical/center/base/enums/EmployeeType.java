@@ -4,5 +4,14 @@ public enum EmployeeType {
     ADMIN,
     DOCTOR,
     ACCOUNTANT,
-    STAFF
+    STAFF;
+
+    public static boolean validateFromString(String value) {
+        try {
+            EmployeeType.valueOf(value);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

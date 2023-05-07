@@ -8,10 +8,10 @@ import com.medical.center.user.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         log.info("Update user={}", user);
+        user.setUpdatedAt(LocalDateTime.now());
         return userRepository.save(user);
     }
 
@@ -48,11 +49,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void hardDelete(Long id) {
-        log.info("Hard delete user by id={}", id);
-        User user = getById(id);
-
-        userRepository.delete(user);
+    public void hardDeleteByEmployeeId(Long employeeId) {
+        log.info("Soft delete user by employeeId={}", employeeId);
+        userRepository.deleteByEmployeeId(employeeId);
     }
 
     @Override
@@ -64,7 +63,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         log.info("Get all users");
-        return userRepository.findAll();
+        return userRepository.findAllByDeletedAtIsNull();
+    }
+
+    @Override
+    public List<User> getAllWithoutEmployee() {
+        log.info("Get all users without employee");
+        return userRepository.findByEmployeeIdIsNull();
     }
 
     @Override
@@ -76,5 +81,11 @@ public class UserServiceImpl implements UserService {
             log.warn("User with email: [{}] not found", email);
             throw new AuthorizationException("Bad credentials");
         }
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        log.info("Get user by email={}", email);
+        return userRepository.findByEmail(email).orElse(null);
     }
 }

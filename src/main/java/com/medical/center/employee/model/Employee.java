@@ -13,7 +13,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.NotFound;
@@ -22,6 +25,9 @@ import org.hibernate.annotations.NotFoundAction;
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "employee")
 public class Employee extends BaseEntity<Long> {
 
@@ -40,7 +46,7 @@ public class Employee extends BaseEntity<Long> {
     private LocalDate startDate;
 
     @ToString.Exclude
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     @NotFound(action = NotFoundAction.IGNORE)
     private User user;

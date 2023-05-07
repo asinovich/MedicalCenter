@@ -27,7 +27,7 @@ public class User extends BaseEntity<Long> {
 
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
