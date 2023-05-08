@@ -27,6 +27,7 @@
               <MenuItem fx:id="menuItemEmployees" mnemonicParsing="false" onAction="#menuItemEmployees" text="Employees" />
               <MenuItem fx:id="menuItemPatients" mnemonicParsing="false" onAction="#menuItemPatients" text="Patients" />
               <MenuItem fx:id="menuItemAppointments" mnemonicParsing="false" onAction="#menuItemAppointments" text="Appointments" />
+              <MenuItem fx:id="menuItemTreatmentOutcomes" mnemonicParsing="false" onAction="#menuItemTreatmentOutcomes" text="TreatmentOutcomes" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

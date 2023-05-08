@@ -3,6 +3,7 @@ package com.medical.center.treatment_outcomes.model;
 import com.medical.center.base.model.BaseEntity;
 import com.medical.center.employee.model.Employee;
 import com.medical.center.patient.model.Patient;
+import com.medical.center.patient_record.model.PatientRecord;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,8 +26,8 @@ import lombok.Setter;
 public class TreatmentOutcomes extends BaseEntity<Long> {
 
     @OneToOne
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
+    @JoinColumn(name = "patient_record_id")
+    private PatientRecord patientRecord;
 
     @OneToOne
     @JoinColumn(name = "employee_id")
@@ -40,4 +41,8 @@ public class TreatmentOutcomes extends BaseEntity<Long> {
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
+
+    public String getPatientFullName() {
+        return patientRecord.getPatient().getFullName();
+    }
 }

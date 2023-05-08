@@ -90,6 +90,9 @@ public class UserController implements Initializable {
     @FXML
     private MenuItem menuItemAppointments;
 
+    @FXML
+    private MenuItem menuItemTreatmentOutcomes;
+
     @Lazy
     @Autowired
     private StageManager stageManager;
@@ -124,6 +127,11 @@ public class UserController implements Initializable {
     @FXML
     void menuItemAppointments(ActionEvent event) {
         stageManager.switchScene(FxmlView.APPOINTMENT);
+    }
+
+    @FXML
+    void menuItemTreatmentOutcomes(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TREATMENT_OUTCOMES);
     }
 
     @FXML

@@ -11,7 +11,7 @@ public interface TreatmentOutcomesRepository extends JpaRepository<TreatmentOutc
 
     Optional<TreatmentOutcomes> findById(Long id);
 
-    List<TreatmentOutcomes> findByPatientId(Long patientId);
+    List<TreatmentOutcomes> findByPatientRecordId(Long patientRecordId);
 
     List<TreatmentOutcomes> findByEmployeeId(Long employeeId);
 

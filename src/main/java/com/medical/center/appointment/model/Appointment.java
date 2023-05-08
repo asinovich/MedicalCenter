@@ -64,5 +64,4 @@ public class Appointment extends BaseEntity<Long> {
     public String getPatientFullName() {
         return patientRecord.getPatient().getFullName();
     }
-
 }

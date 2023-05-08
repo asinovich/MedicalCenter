@@ -70,6 +70,17 @@ public enum FxmlView {
             return "/fxml/AppointmentView.fxml";
         }
     },
+    TREATMENT_OUTCOMES {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("treatment.outcomes.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/TreatmentOutcomes.fxml";
+        }
+    },
     TREATMENT_OUTCOMES_VIEW {
         @Override
         public String getTitle() {

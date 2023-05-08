@@ -1,5 +1,6 @@
 package com.medical.center.treatment_outcomes.service.impl;
 
+import com.medical.center.patient_record.service.PatientRecordService;
 import com.medical.center.treatment_outcomes.model.TreatmentOutcomes;
 import com.medical.center.treatment_outcomes.repository.TreatmentOutcomesRepository;
 import com.medical.center.treatment_outcomes.service.TreatmentOutcomesService;
@@ -14,6 +15,9 @@ public class TreatmentOutcomesServiceImpl implements TreatmentOutcomesService {
 
     @Autowired
     private TreatmentOutcomesRepository treatmentOutcomesRepository;
+
+    @Autowired
+    private PatientRecordService patientRecordService;
 
     @Override
     public TreatmentOutcomes create(TreatmentOutcomes treatmentOutcomes) {
@@ -42,7 +46,8 @@ public class TreatmentOutcomesServiceImpl implements TreatmentOutcomesService {
     @Override
     public List<TreatmentOutcomes> getByPatientId(Long patientId) {
         log.info("Get treatmentOutcomes by patientId={}", patientId);
-        return treatmentOutcomesRepository.findByPatientId(patientId);
+        Long patientRecordId = patientRecordService.getByPatientId(patientId).getId();
+        return treatmentOutcomesRepository.findByPatientRecordId(patientRecordId);
     }
 
     @Override

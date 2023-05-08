@@ -8,6 +8,7 @@ import com.medical.center.employee.model.Employee;
 import com.medical.center.employee.service.EmployeeService;
 import com.medical.center.patient.model.Patient;
 import com.medical.center.patient.service.PatientService;
+import com.medical.center.patient_record.service.PatientRecordService;
 import com.medical.center.treatment_outcomes.model.TreatmentOutcomes;
 import com.medical.center.treatment_outcomes.service.TreatmentOutcomesService;
 import java.net.URL;
@@ -76,12 +77,19 @@ public class TreatmentOutcomesViewController implements Initializable {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private PatientRecordService patientRecordService;
+
     private String patientId;
 
     @FXML
     void back(ActionEvent event) {
-        Patient patient = patientService.getById(Long.parseLong(patientId));
-        stageManager.switchScene(FxmlView.PATIENT_VIEW, patient);
+        if (Long.parseLong(patientId) != 0) {
+            Patient patient = patientService.getById(Long.parseLong(patientId));
+            stageManager.switchScene(FxmlView.PATIENT_VIEW, patient);
+        } else {
+            stageManager.switchScene(FxmlView.TREATMENT_OUTCOMES);
+        }
     }
 
     @FXML
@@ -108,7 +116,7 @@ public class TreatmentOutcomesViewController implements Initializable {
                     .treatment(treatment.getText())
                     .date(date.getValue())
                     .diagnosis(diagnosis.getText())
-                    .patient(patientService.getByFullName(cbPatient.getValue()))
+                    .patientRecord(patientRecordService.getByPatientId(patientService.getByFullName(cbPatient.getValue()).getId()))
                     .employee(employeeService.getByFullName(cbEmployee.getValue()))
                     .build();
 
@@ -125,7 +133,7 @@ public class TreatmentOutcomesViewController implements Initializable {
                 treatmentOutcomes.setTreatment(treatment.getText());
                 treatmentOutcomes.setDiagnosis(diagnosis.getText());
                 treatmentOutcomes.setDate(date.getValue());
-                treatmentOutcomes.setPatient(patientService.getByFullName(cbPatient.getValue()));
+                treatmentOutcomes.setPatientRecord(patientRecordService.getByPatientId(patientService.getByFullName(cbPatient.getValue()).getId()));
                 treatmentOutcomes.setEmployee(employeeService.getByFullName(cbEmployee.getValue()));
 
                 TreatmentOutcomes updatedTreatmentOutcomes = treatmentOutcomesService.update(treatmentOutcomes);
@@ -157,7 +165,7 @@ public class TreatmentOutcomesViewController implements Initializable {
             diagnosis.setText(treatmentOutcomes.getDiagnosis());
             treatment.setText(treatmentOutcomes.getTreatment());
             cbEmployee.getSelectionModel().select(treatmentOutcomes.getEmployee().getFullName());
-            cbPatient.getSelectionModel().select(treatmentOutcomes.getPatient().getFullName());
+            cbPatient.getSelectionModel().select(treatmentOutcomes.getPatientFullName());
         }
 
         ObservableList<String> employees = FXCollections.observableArrayList(

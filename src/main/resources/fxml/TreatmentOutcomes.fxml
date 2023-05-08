@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.appointment.controller.AppointmentController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.treatment_outcomes.controller.TreatmentOutcomesController">
    <top>
       <MenuBar BorderPane.alignment="TOP_LEFT">
         <menus>
@@ -35,7 +35,7 @@
    <left>
       <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Add New Appointment" textFill="WHITE">
+            <Label text="Add New Treatment Outcomes" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -45,12 +45,12 @@
             </Label>
             <HBox prefHeight="30.0" prefWidth="265.0">
                <children>
-                  <Label text="Appointment ID - " textFill="#f8f7f7">
+                  <Label text="Treatment Outcomes ID - " textFill="#f8f7f7">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="appointmentId">
+                  <Label fx:id="treatmentOutcomesId">
                      <HBox.margin>
                         <Insets left="25.0" />
                      </HBox.margin>
@@ -60,12 +60,7 @@
                   <Insets left="25.0" />
                </VBox.margin>
             </HBox>
-            <DatePicker fx:id="date" editable="false" maxWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Visit Date">
-               <VBox.margin>
-                  <Insets left="25.0" />
-               </VBox.margin>
-            </DatePicker>
-            <TextField fx:id="time" maxWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Visit Time">
+            <TextField fx:id="diagnosis" maxWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Diagnosis">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -73,32 +68,22 @@
                   <Insets left="25.0" />
                </VBox.margin>
             </TextField>
-            <TextArea fx:id="note" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="240.0" promptText="Note">
+            <TextArea fx:id="treatment" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="240.0" promptText="Treatment">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
             </TextArea>
-            <ComboBox fx:id="cbType" prefWidth="240.0" promptText="Type">
+            <DatePicker fx:id="date" editable="false" maxWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Date">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
-            </ComboBox>
-            <ComboBox fx:id="cbStatus" prefWidth="240.0" promptText="Status">
-               <VBox.margin>
-                  <Insets left="25.0" />
-               </VBox.margin>
-            </ComboBox>
+            </DatePicker>
             <ComboBox fx:id="cbEmployee" prefWidth="240.0" promptText="Employee">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
             </ComboBox>
             <ComboBox fx:id="cbPatient" prefWidth="240.0" promptText="Patient">
-               <VBox.margin>
-                  <Insets left="25.0" />
-               </VBox.margin>
-            </ComboBox>
-            <ComboBox fx:id="cbRoom" prefWidth="240.0" promptText="Room">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
@@ -153,16 +138,14 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="appointmentTable" prefHeight="520.0" prefWidth="679.0" tableMenuButtonVisible="true">
+            <TableView fx:id="treatmentOutcomesTable" prefHeight="520.0" prefWidth="679.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="colId" maxWidth="700.0" prefWidth="20.0" text="ID" />
-                <TableColumn fx:id="colVisitDateTime" maxWidth="4000.0" prefWidth="75.0" text="Visit Date Time" />
-                  <TableColumn fx:id="colNote" maxWidth="4000.0" prefWidth="75.0" text="Note" />
-                  <TableColumn fx:id="colType" maxWidth="4000.0" prefWidth="75.0" text="Type" />
-                  <TableColumn fx:id="colStatus" maxWidth="4000.0" prefWidth="60.0" text="Status" />
+                <TableColumn fx:id="colDiagnosis" maxWidth="4000.0" prefWidth="75.0" text="Diagnosis" />
+                  <TableColumn fx:id="colTreatment" maxWidth="4000.0" prefWidth="75.0" text="Treatment" />
+                  <TableColumn fx:id="colDate" maxWidth="4000.0" prefWidth="75.0" text="Date" />
                   <TableColumn fx:id="colEmployee" maxWidth="6000.0" prefWidth="130.0" text="Employee" />
                   <TableColumn fx:id="colPatient" maxWidth="3500.0" prefWidth="102.0" text="Patient" />
-                  <TableColumn fx:id="colRoom" maxWidth="6000.0" prefWidth="65.0" text="Room" />
                   <TableColumn fx:id="colEdit" maxWidth="6000.0" prefWidth="85.0" text="Edit" />
               </columns>
                <VBox.margin>
