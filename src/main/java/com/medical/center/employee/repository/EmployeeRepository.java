@@ -13,5 +13,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     Optional<Employee> findByUserId(Long userId);
 
+    Optional<Employee> findByFirstNameAndLastName(String firstName, String lastName);
+
     List<Employee> findAllByDeletedAtIsNull();
 }

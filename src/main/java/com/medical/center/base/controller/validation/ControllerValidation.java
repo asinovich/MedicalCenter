@@ -1,6 +1,8 @@
 package com.medical.center.base.controller.validation;
 
 import com.medical.center.base.controller.alert.ControllerAlert;
+import com.medical.center.base.enums.AppointmentStatus;
+import com.medical.center.base.enums.AppointmentType;
 import com.medical.center.base.enums.EmployeeType;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
@@ -88,6 +90,24 @@ public class ControllerValidation {
     }
 
     public static boolean isNotBlank(String field, EmployeeType value) {
+        if (value != null) {
+            return true;
+        } else {
+            ControllerAlert.validationAlert(field, true);
+            return false;
+        }
+    }
+
+    public static boolean isNotBlank(String field, AppointmentType value) {
+        if (value != null) {
+            return true;
+        } else {
+            ControllerAlert.validationAlert(field, true);
+            return false;
+        }
+    }
+
+    public static boolean isNotBlank(String field, AppointmentStatus value) {
         if (value != null) {
             return true;
         } else {

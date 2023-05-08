@@ -15,5 +15,7 @@ public interface PatientRecordService {
 
     PatientRecord getById(Long id);
 
+    PatientRecord getByPatientId(Long patientId);
+
     List<PatientRecord> getAll();
 }

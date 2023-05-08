@@ -40,6 +40,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public Room getByName(String name) {
+        log.info("Get room by name={}", name);
+        return roomRepository.findByName(name).orElse(null);
+    }
+
+    @Override
     public List<Room> getAll() {
         log.info("Get all rooms");
         return roomRepository.findAll();

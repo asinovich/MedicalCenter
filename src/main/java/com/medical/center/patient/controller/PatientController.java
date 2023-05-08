@@ -249,7 +249,7 @@ public class PatientController implements Initializable {
     @FXML
     void getPatientDetails(ActionEvent event) throws IOException {
         Patient patient = patientTable.getSelectionModel().getSelectedItems().get(0);
-/*        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PatientView.fxml"));
+/*        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PatientView1.fxml"));
         root = loader.load();
 
         //patientViewController.setPatientId(patient.getId());

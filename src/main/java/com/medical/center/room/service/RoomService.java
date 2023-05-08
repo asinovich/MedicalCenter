@@ -14,5 +14,7 @@ public interface RoomService {
 
     Room getById(Long id);
 
+    Room getByName(String name);
+
     List<Room> getAll();
 }

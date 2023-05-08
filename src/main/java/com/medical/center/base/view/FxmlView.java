@@ -48,6 +48,39 @@ public enum FxmlView {
             return "/fxml/PatientView.fxml";
         }
     },
+    APPOINTMENT {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("appointment.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/Appointment.fxml";
+        }
+    },
+    APPOINTMENT_VIEW {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("appointment.details.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/AppointmentView.fxml";
+        }
+    },
+    TREATMENT_OUTCOMES_VIEW {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("treatment.outcomes.details.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/TreatmentOutcomesView.fxml";
+        }
+    },
     LOGIN {
         @Override
 		public String getTitle() {

@@ -51,16 +51,18 @@ public class Appointment extends BaseEntity<Long> {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @NotFound(action = NotFoundAction.IGNORE)
     private Employee employee;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "patient_record_id")
-    @NotFound(action = NotFoundAction.IGNORE)
     private PatientRecord patientRecord;
 
     @OneToOne
     @JoinColumn(name = "room_id")
     private Room room;
+
+    public String getPatientFullName() {
+        return patientRecord.getPatient().getFullName();
+    }
 
 }

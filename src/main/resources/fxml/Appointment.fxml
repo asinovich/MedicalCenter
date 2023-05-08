@@ -9,35 +9,24 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.user.controller.UserController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.appointment.controller.AppointmentController">
    <top>
       <MenuBar BorderPane.alignment="TOP_LEFT">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Pages">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#menuItemLogout" text="Logout" />
+              <MenuItem fx:id="menuItemUsers" mnemonicParsing="false" onAction="#menuItemUsers" text="Users" />
             </items>
           </Menu>
         </menus>
@@ -46,7 +35,7 @@
    <left>
       <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Add New User" textFill="WHITE">
+            <Label text="Add New Appointment" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -56,12 +45,12 @@
             </Label>
             <HBox prefHeight="30.0" prefWidth="265.0">
                <children>
-                  <Label text="User ID - " textFill="#f8f7f7">
+                  <Label text="Appointment ID - " textFill="#f8f7f7">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="userId">
+                  <Label fx:id="appointmentId">
                      <HBox.margin>
                         <Insets left="25.0" />
                      </HBox.margin>
@@ -71,50 +60,49 @@
                   <Insets left="25.0" />
                </VBox.margin>
             </HBox>
-            <TextField fx:id="firstName" prefHeight="30.0" prefWidth="246.0" promptText="First Name">
-               <VBox.margin>
-                  <Insets left="25.0" right="25.0" />
-               </VBox.margin></TextField>
-            <TextField fx:id="lastName" prefHeight="30.0" prefWidth="246.0" promptText="Last Name">
-               <VBox.margin>
-                  <Insets left="25.0" right="25.0" />
-               </VBox.margin></TextField>
-            <DatePicker fx:id="dob" editable="false" prefHeight="30.0" prefWidth="245.0" promptText="Date of Birth">
+            <DatePicker fx:id="date" editable="false" maxWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Visit Date">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
             </DatePicker>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="255.0" spacing="15.0">
-               <children>
-                  <RadioButton fx:id="rbMale" mnemonicParsing="false" selected="true" text="Male" textFill="WHITE">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="gender" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="rbFemale" mnemonicParsing="false" text="Female" textFill="WHITE" toggleGroup="$gender">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
+            <TextField fx:id="time" maxWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Visit Time">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <VBox.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets left="25.0" />
                </VBox.margin>
-            </HBox>
-            <ComboBox fx:id="cbRole" prefHeight="30.0" prefWidth="246.0" promptText="Select Role">
+            </TextField>
+            <TextArea fx:id="note" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="240.0" promptText="Note">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </TextArea>
+            <ComboBox fx:id="cbType" prefWidth="240.0" promptText="Type">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
             </ComboBox>
-            <TextField fx:id="email" prefHeight="30.0" prefWidth="246.0" promptText="Email">
+            <ComboBox fx:id="cbStatus" prefWidth="240.0" promptText="Status">
                <VBox.margin>
-                  <Insets left="25.0" right="25.0" />
-               </VBox.margin></TextField>
-            <PasswordField fx:id="password" prefHeight="30.0" prefWidth="246.0" promptText="Password">
-               <VBox.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets left="25.0" />
                </VBox.margin>
-            </PasswordField>
+            </ComboBox>
+            <ComboBox fx:id="cbEmployee" prefWidth="240.0" promptText="Employee">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="cbPatient" prefWidth="240.0" promptText="Patient">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="cbRoom" prefWidth="240.0" promptText="Room">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </ComboBox>
             <HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
                <children>
                   <Button fx:id="reset" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
@@ -122,7 +110,7 @@
                         <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
                      </effect>
                   </Button>
-                  <Button fx:id="saveUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveUser" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
+                  <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -152,7 +140,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" prefHeight="41.0" prefWidth="640.0">
                <children>
-                  <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#logout" prefHeight="22.0" prefWidth="70.0" styleClass="background" text="Logout" textFill="#fff9f9" textOverrun="CLIP">
+                  <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" prefHeight="22.0" prefWidth="70.0" styleClass="background" text="Refresh" textFill="#fff9f9" textOverrun="CLIP">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -165,16 +153,17 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="userTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
+            <TableView fx:id="appointmentTable" prefHeight="520.0" prefWidth="679.0" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn fx:id="colUserId" maxWidth="700.0" prefWidth="20.0" text="ID" />
-                <TableColumn fx:id="colFirstName" maxWidth="4000.0" prefWidth="75.0" text="First Name" />
-                  <TableColumn fx:id="colLastName" maxWidth="4000.0" prefWidth="75.0" text="Last Name" />
-                  <TableColumn fx:id="colDOB" maxWidth="4000.0" prefWidth="75.0" text="Date of Birth" />
-                  <TableColumn fx:id="colGender" maxWidth="4000.0" prefWidth="60.0" text="Gender" />
-                  <TableColumn fx:id="colRole" maxWidth="4000.0" prefWidth="75.0" text="Role" />
-                  <TableColumn fx:id="colEmail" maxWidth="6000.0" prefWidth="130.0" text="Email" />
-                  <TableColumn fx:id="colEdit" maxWidth="3500.0" prefWidth="75.0" text="Edit" />
+                <TableColumn fx:id="colId" maxWidth="700.0" prefWidth="20.0" text="ID" />
+                <TableColumn fx:id="colVisitDateTime" maxWidth="4000.0" prefWidth="75.0" text="Visit Date Time" />
+                  <TableColumn fx:id="colNote" maxWidth="4000.0" prefWidth="75.0" text="Note" />
+                  <TableColumn fx:id="colType" maxWidth="4000.0" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="colStatus" maxWidth="4000.0" prefWidth="60.0" text="Status" />
+                  <TableColumn fx:id="colEmployee" maxWidth="6000.0" prefWidth="130.0" text="Employee" />
+                  <TableColumn fx:id="colPatient" maxWidth="3500.0" prefWidth="102.0" text="Patient" />
+                  <TableColumn fx:id="colRoom" maxWidth="6000.0" prefWidth="65.0" text="Room" />
+                  <TableColumn fx:id="colEdit" maxWidth="6000.0" prefWidth="85.0" text="Edit" />
               </columns>
                <VBox.margin>
                   <Insets left="10.0" right="5.0" />
@@ -185,7 +174,10 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem fx:id="deleteUsers" mnemonicParsing="false" onAction="#deleteUsers" text="Delete" />
+                      <MenuItem fx:id="getDetails" mnemonicParsing="false" onAction="#getDetails" text="Get Details" />
+                    </items>
+                    <items>
+                      <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#delete" text="Delete" />
                     </items>
                   </ContextMenu>
                </contextMenu>

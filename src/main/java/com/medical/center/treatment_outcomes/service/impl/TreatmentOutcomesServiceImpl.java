@@ -34,6 +34,12 @@ public class TreatmentOutcomesServiceImpl implements TreatmentOutcomesService {
     }
 
     @Override
+    public void delete(Long id) {
+        log.info("Delete treatmentOutcomes by id={}", id);
+        treatmentOutcomesRepository.delete(id);
+    }
+
+    @Override
     public List<TreatmentOutcomes> getByPatientId(Long patientId) {
         log.info("Get treatmentOutcomes by patientId={}", patientId);
         return treatmentOutcomesRepository.findByPatientId(patientId);

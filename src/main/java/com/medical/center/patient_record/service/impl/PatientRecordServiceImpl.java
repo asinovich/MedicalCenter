@@ -1,5 +1,6 @@
 package com.medical.center.patient_record.service.impl;
 
+import com.medical.center.employee.model.Employee;
 import com.medical.center.patient_record.model.PatientRecord;
 import com.medical.center.patient_record.repository.PatientRecordRepository;
 import com.medical.center.patient_record.service.PatientRecordService;
@@ -48,6 +49,12 @@ public class PatientRecordServiceImpl implements PatientRecordService {
     public PatientRecord getById(Long id) {
         log.info("Get patientRecord by id={}", id);
         return patientRecordRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public PatientRecord getByPatientId(Long patientId) {
+        log.info("Get patientRecord by patientId={}", patientId);
+        return patientRecordRepository.findByPatientId(patientId).orElse(null);
     }
 
     @Override

@@ -11,6 +11,8 @@ public interface TreatmentOutcomesService {
 
     TreatmentOutcomes getById(Long id);
 
+    void delete(Long id);
+
     List<TreatmentOutcomes> getByPatientId(Long patientId);
 
     List<TreatmentOutcomes> getByEmployeeId(Long employeeId);

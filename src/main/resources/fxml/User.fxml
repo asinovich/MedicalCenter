@@ -26,6 +26,7 @@
               <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#menuItemLogout" text="Logout" />
               <MenuItem fx:id="menuItemEmployees" mnemonicParsing="false" onAction="#menuItemEmployees" text="Employees" />
               <MenuItem fx:id="menuItemPatients" mnemonicParsing="false" onAction="#menuItemPatients" text="Patients" />
+              <MenuItem fx:id="menuItemAppointments" mnemonicParsing="false" onAction="#menuItemAppointments" text="Appointments" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
