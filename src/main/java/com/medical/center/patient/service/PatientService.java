@@ -1,7 +1,6 @@
-package com.medical.center.petient.service;
+package com.medical.center.patient.service;
 
-import com.medical.center.employee.model.Employee;
-import com.medical.center.petient.model.Patient;
+import com.medical.center.patient.model.Patient;
 import java.util.List;
 
 public interface PatientService {

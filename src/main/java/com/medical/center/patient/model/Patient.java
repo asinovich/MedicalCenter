@@ -1,4 +1,4 @@
-package com.medical.center.petient.model;
+package com.medical.center.patient.model;
 
 import com.medical.center.base.model.BaseEntity;
 import com.medical.center.patient_record.model.PatientRecord;
@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +17,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "patient")
 public class Patient extends BaseEntity<Long> {

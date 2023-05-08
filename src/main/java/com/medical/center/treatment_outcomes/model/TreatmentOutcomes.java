@@ -2,7 +2,7 @@ package com.medical.center.treatment_outcomes.model;
 
 import com.medical.center.base.model.BaseEntity;
 import com.medical.center.employee.model.Employee;
-import com.medical.center.petient.model.Patient;
+import com.medical.center.patient.model.Patient;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;

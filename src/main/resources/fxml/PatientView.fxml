@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="287.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.employee.controller.EmployeeController">
+<BorderPane prefHeight="600.0" prefWidth="287.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.patient.controller.PatientViewController">
    <top>
       <MenuBar BorderPane.alignment="TOP_LEFT">
         <menus>
@@ -36,7 +36,7 @@
                   <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" top="30.0" />
+                  <Insets bottom="10.0" left="20.0" top="25.0" />
                </VBox.margin>
             </Label>
             <HBox prefHeight="30.0" prefWidth="265.0">
@@ -56,12 +56,12 @@
                   <Insets left="25.0" />
                </VBox.margin>
             </HBox>
-            <TextField fx:id="firstName1" maxWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="First Name">
+            <TextField fx:id="firstName" maxWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="First Name">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="lastName1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Last Name">
+            <TextField fx:id="lastName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Last Name">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
@@ -91,7 +91,12 @@
             </TextArea>
             <HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
                <children>
-                  <Button fx:id="saveEmployee" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveEmployee" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Back">
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="savePatiet" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#savePatient" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -102,7 +107,7 @@
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="refresh" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveEmployee" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Refresh" textFill="WHITE">
+                  <Button fx:id="refresh" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refresh" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Refresh" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -115,7 +120,7 @@
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets left="70.0" />
+                  <Insets left="23.0" />
                </VBox.margin>
             </HBox>
          </children>

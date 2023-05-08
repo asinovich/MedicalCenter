@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.employee.controller.EmployeeController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.medical.center.patient.controller.PatientController">
    <top>
       <MenuBar BorderPane.alignment="TOP_LEFT">
         <menus>
@@ -147,7 +147,7 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="employeeTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
+            <TableView fx:id="patientTable" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="colPatientd" maxWidth="700.0" prefWidth="20.0" text="ID" />
                 <TableColumn fx:id="colFirstName" maxWidth="4000.0" prefWidth="75.0" text="First Name" />
@@ -167,10 +167,13 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem fx:id="softDeletedEmployee" mnemonicParsing="false" onAction="#softDeletedEmployee" text="Soft Delete" />
+                      <MenuItem fx:id="getPatientDetails" mnemonicParsing="false" onAction="#getPatientDetails" text="Get Details" />
                     </items>
                     <items>
-                      <MenuItem fx:id="hardDeletedEmployee" mnemonicParsing="false" onAction="#hardDeletedEmployee" text="Hard Delete" />
+                      <MenuItem fx:id="softDeletedPatient" mnemonicParsing="false" onAction="#softDeletedPatient" text="Soft Delete" />
+                    </items>
+                    <items>
+                      <MenuItem fx:id="hardDeletedPatient" mnemonicParsing="false" onAction="#hardDeletedPatient" text="Hard Delete" />
                     </items>
                   </ContextMenu>
                </contextMenu>

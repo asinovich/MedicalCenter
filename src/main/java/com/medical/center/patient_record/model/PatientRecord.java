@@ -2,7 +2,7 @@ package com.medical.center.patient_record.model;
 
 import com.medical.center.appointment.model.Appointment;
 import com.medical.center.base.model.BaseEntity;
-import com.medical.center.petient.model.Patient;
+import com.medical.center.patient.model.Patient;
 import com.medical.center.treatment_outcomes.model.TreatmentOutcomes;
 import java.util.List;
 import javax.persistence.Entity;

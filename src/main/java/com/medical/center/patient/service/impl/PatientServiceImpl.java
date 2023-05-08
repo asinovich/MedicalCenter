@@ -1,8 +1,8 @@
-package com.medical.center.petient.service.impl;
+package com.medical.center.patient.service.impl;
 
-import com.medical.center.petient.model.Patient;
-import com.medical.center.petient.repository.PatientRepository;
-import com.medical.center.petient.service.PatientService;
+import com.medical.center.patient.model.Patient;
+import com.medical.center.patient.repository.PatientRepository;
+import com.medical.center.patient.service.PatientService;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -62,6 +62,6 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public List<Patient> getAll() {
         log.info("Get all patients");
-        return patientRepository.findAll();
+        return patientRepository.findByDeletedAtIsNull();
     }
 }

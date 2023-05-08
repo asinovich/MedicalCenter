@@ -31,6 +31,11 @@ public class StageManager {
         Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
         show(viewRootNodeHierarchy, view.getTitle());
     }
+
+    public void switchScene(final FxmlView view, final Object obj) {
+        Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
+        show(viewRootNodeHierarchy, view.getTitle(), obj);
+    }
     
     private void show(final Parent rootnode, String title) {
         Scene scene = prepareScene(rootnode);
@@ -48,7 +53,24 @@ public class StageManager {
             logAndExit ("Unable to show scene for title" + title,  exception);
         }
     }
-    
+
+    private void show(final Parent rootnode, String title, Object obj) {
+        Scene scene = prepareScene(rootnode);
+        //scene.getStylesheets().add("/styles/Styles.css");
+
+        //primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setTitle(title);
+        primaryStage.setScene(scene);
+        primaryStage.setUserData(obj);
+        primaryStage.sizeToScene();
+        primaryStage.centerOnScreen();
+
+        try {
+            primaryStage.show();
+        } catch (Exception exception) {
+            logAndExit ("Unable to show scene for title" + title,  exception);
+        }
+    }
     private Scene prepareScene(Parent rootnode){
         Scene scene = primaryStage.getScene();
 
