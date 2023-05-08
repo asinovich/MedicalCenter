@@ -11,8 +11,7 @@ public class ControllerConstant {
     public static int NAME_LENGTH = 20;
     public static int ADDRESS_LENGTH = 200;
     public static int NOTE_LENGTH = 500;
-
     public static int DIAGNOSIS_LENGTH = 70;
-
     public static int TREATMENT_LENGTH = 1000;
+    public static int DESCRIPTION_LENGTH = 200;
 }
