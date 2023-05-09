@@ -139,7 +139,7 @@ public class AppointmentViewController implements Initializable {
     @FXML
     void saveAppointment(ActionEvent event) {
         if (StringUtils.isBlank(appointmentId.getText())) {
-            if (validate()) {
+            if (validate(false)) {
 
                 Appointment appointment = Appointment.builder()
                     .visitDateTime(LocalDateTime.of(date.getValue(), LocalTime.parse(time.getText())))
@@ -157,7 +157,7 @@ public class AppointmentViewController implements Initializable {
             }
 
         } else {
-            if (validate()) {
+            if (validate(true)) {
 
                 Appointment appointment = appointmentService.getById(Long.parseLong(appointmentId.getText()));
 
@@ -250,7 +250,7 @@ public class AppointmentViewController implements Initializable {
     }
 */
 
-    private boolean validate() {
+    private boolean validate(boolean isUpdate) {
         return ControllerValidation.isNotBlank("date", date.getValue())
             && ControllerValidation.validate("time", time.getText(), ControllerConstant.TIME_REGEX)
             && ControllerValidation.validateStringLengthIsNotEmpty("note", note.getText(), ControllerConstant.NOTE_LENGTH)
@@ -258,6 +258,32 @@ public class AppointmentViewController implements Initializable {
             && ControllerValidation.isNotBlank("appointment status", cbStatus.getValue())
             && ControllerValidation.isNotBlank("employee", cbEmployee.getValue())
             && ControllerValidation.isNotBlank("patient", cbPatient.getValue())
-            && ControllerValidation.isNotBlank("room", cbRoom.getValue());
+            && ControllerValidation.isNotBlank("room", cbRoom.getValue())
+            && validateAppointment(isUpdate);
+    }
+
+    public boolean validateAppointment(boolean isUpdate) {
+        Long employeeId = employeeService.getByFullName(cbEmployee.getValue()).getId();
+        LocalDateTime visitDateTime = LocalDateTime.of(date.getValue(), LocalTime.parse(time.getText()));
+        AppointmentType type = cbType.getValue();
+        Long id = isUpdate ? Long.parseLong(appointmentId.getText()) : null;
+
+        if (appointmentService.hasEmployeeFreeTime(employeeId, visitDateTime, type, id)) {
+            return true;
+        } else {
+            validationAppointmentAlert(employeeId, type, visitDateTime, id);
+            return false;
+        }
+    }
+
+    public void validationAppointmentAlert(Long employeeId, AppointmentType type, LocalDateTime localDateTime, Long appointmentId) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Validation Error");
+        alert.setHeaderText(null);
+
+        alert.setContentText("The employee is busy in  " + localDateTime.toString()
+            + "\n Employee has free time: " + appointmentService.getEmployeeFreeTime(employeeId, type, localDateTime.toLocalDate(), appointmentId).toString());
+
+        alert.showAndWait();
     }
 }

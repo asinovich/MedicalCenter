@@ -3,6 +3,7 @@ package com.medical.center.appointment.controller;
 import com.medical.center.appointment.model.Appointment;
 import com.medical.center.appointment.service.AppointmentService;
 import com.medical.center.base.constant.ControllerConstant;
+import com.medical.center.base.controller.alert.ControllerAlert;
 import com.medical.center.base.controller.validation.ControllerValidation;
 import com.medical.center.base.enums.AppointmentStatus;
 import com.medical.center.base.enums.AppointmentType;
@@ -24,6 +25,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -41,6 +44,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -223,7 +227,7 @@ public class AppointmentController implements Initializable {
     @FXML
     void save(ActionEvent event) {
         if (StringUtils.isBlank(appointmentId.getText())) {
-            if (validate()) {
+            if (validate(false)) {
 
                 Appointment appointment = Appointment.builder()
                     .visitDateTime(LocalDateTime.of(date.getValue(), LocalTime.parse(time.getText())))
@@ -240,7 +244,7 @@ public class AppointmentController implements Initializable {
             }
 
         } else {
-            if (validate()) {
+            if (validate(true)) {
 
                 Appointment appointment = appointmentService.getById(Long.parseLong(appointmentId.getText()));
 
@@ -400,7 +404,7 @@ public class AppointmentController implements Initializable {
         alert.showAndWait();
     }
 
-    private boolean validate() {
+    private boolean validate(boolean isUpdate) {
         return ControllerValidation.isNotBlank("date", date.getValue())
             && ControllerValidation.validate("time", time.getText(), ControllerConstant.TIME_REGEX)
             && ControllerValidation.validateStringLengthIsNotEmpty("note", note.getText(), ControllerConstant.NOTE_LENGTH)
@@ -408,6 +412,32 @@ public class AppointmentController implements Initializable {
             && ControllerValidation.isNotBlank("appointment status", cbStatus.getValue())
             && ControllerValidation.isNotBlank("employee", cbEmployee.getValue())
             && ControllerValidation.isNotBlank("patient", cbPatient.getValue())
-            && ControllerValidation.isNotBlank("room", cbRoom.getValue());
+            && ControllerValidation.isNotBlank("room", cbRoom.getValue())
+            && validateAppointment(isUpdate);
+    }
+
+    public boolean validateAppointment(boolean isUpdate) {
+        Long employeeId = employeeService.getByFullName(cbEmployee.getValue()).getId();
+        LocalDateTime visitDateTime = LocalDateTime.of(date.getValue(), LocalTime.parse(time.getText()));
+        AppointmentType type = cbType.getValue();
+        Long id = isUpdate ? Long.parseLong(appointmentId.getText()) : null;
+
+        if (appointmentService.hasEmployeeFreeTime(employeeId, visitDateTime, type, id)) {
+            return true;
+        } else {
+            validationAppointmentAlert(employeeId, type, visitDateTime, id);
+            return false;
+        }
+    }
+
+    public void validationAppointmentAlert(Long employeeId, AppointmentType type, LocalDateTime localDateTime, Long appointmentId) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Validation Error");
+        alert.setHeaderText(null);
+
+        alert.setContentText("The employee is busy in  " + localDateTime.toString()
+            + "\n Employee has free time: " + appointmentService.getEmployeeFreeTime(employeeId, type, localDateTime.toLocalDate(), appointmentId).toString());
+
+        alert.showAndWait();
     }
 }
