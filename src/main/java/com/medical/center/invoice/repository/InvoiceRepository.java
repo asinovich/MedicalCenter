@@ -11,5 +11,5 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
     Optional<Invoice> findById(Long id);
 
-    List<Invoice> findByAccounting(Long accountingId);
+    List<Invoice> findByAccountingId(Long accountingId);
 }

@@ -48,9 +48,15 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    public List<Invoice> getByAccountingId(Long accountingId) {
+        log.info("Get invoices by accountingId={}", accountingId);
+        return invoiceRepository.findByAccountingId(accountingId);
+    }
+
+    @Override
     public BigDecimal calculateTotalIncomeByAccounting(Long accountingId) {
         log.info("Calculate total income by accounting={}", accountingId);
-        List<Invoice> invoices = invoiceRepository.findByAccounting(accountingId);
+        List<Invoice> invoices = invoiceRepository.findByAccountingId(accountingId);
         List<BigDecimal> bigDecimalList = invoices.stream()
             .map(Invoice::getTotalCoast)
             .collect(Collectors.toList());

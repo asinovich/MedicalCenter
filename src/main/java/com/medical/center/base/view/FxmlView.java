@@ -81,6 +81,28 @@ public enum FxmlView {
             return "/fxml/AppointmentView.fxml";
         }
     },
+    ACCOUNTING {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("accounting.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/Accounting.fxml";
+        }
+    },
+    ACCOUNTING_VIEW {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("accounting.details.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/AccountingView.fxml";
+        }
+    },
     TREATMENT_OUTCOMES {
         @Override
         public String getTitle() {

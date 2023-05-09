@@ -16,5 +16,7 @@ public interface InvoiceService {
 
     List<Invoice> getAll();
 
+    List<Invoice> getByAccountingId(Long accountingId);
+
     BigDecimal calculateTotalIncomeByAccounting(Long accountingId);
 }

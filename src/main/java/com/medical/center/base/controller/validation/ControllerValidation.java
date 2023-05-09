@@ -4,6 +4,7 @@ import com.medical.center.base.controller.alert.ControllerAlert;
 import com.medical.center.base.enums.AppointmentStatus;
 import com.medical.center.base.enums.AppointmentType;
 import com.medical.center.base.enums.EmployeeType;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
