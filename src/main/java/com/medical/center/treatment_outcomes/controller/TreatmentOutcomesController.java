@@ -1,11 +1,7 @@
 package com.medical.center.treatment_outcomes.controller;
 
-import com.medical.center.appointment.model.Appointment;
-import com.medical.center.appointment.service.AppointmentService;
 import com.medical.center.base.constant.ControllerConstant;
 import com.medical.center.base.controller.validation.ControllerValidation;
-import com.medical.center.base.enums.AppointmentStatus;
-import com.medical.center.base.enums.AppointmentType;
 import com.medical.center.base.view.FxmlView;
 import com.medical.center.config.StageManager;
 import com.medical.center.employee.model.Employee;
@@ -13,12 +9,9 @@ import com.medical.center.employee.service.EmployeeService;
 import com.medical.center.patient.model.Patient;
 import com.medical.center.patient.service.PatientService;
 import com.medical.center.patient_record.service.PatientRecordService;
-import com.medical.center.room.model.Room;
-import com.medical.center.room.service.RoomService;
 import com.medical.center.treatment_outcomes.model.TreatmentOutcomes;
 import com.medical.center.treatment_outcomes.service.TreatmentOutcomesService;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
