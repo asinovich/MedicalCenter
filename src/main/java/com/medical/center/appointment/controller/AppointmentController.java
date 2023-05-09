@@ -119,7 +119,10 @@ public class AppointmentController implements Initializable {
     private MenuItem menuItemLogout;
 
     @FXML
-    private MenuItem menuItemUsers;
+    private MenuItem menuItemPatients;
+
+    @FXML
+    private MenuItem menuItemTreatmentOutcomes;
 
     @FXML
     private TextArea note;
@@ -196,8 +199,13 @@ public class AppointmentController implements Initializable {
     }
 
     @FXML
-    void menuItemUsers(ActionEvent event) {
-        stageManager.switchScene(FxmlView.USER);
+    void menuItemPatients(ActionEvent event) {
+        stageManager.switchScene(FxmlView.PATIENT);
+    }
+
+    @FXML
+    void menuItemTreatmentOutcomes(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TREATMENT_OUTCOMES);
     }
 
 

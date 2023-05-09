@@ -25,6 +25,11 @@
             <items>
               <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#menuItemLogout" text="Logout" />
               <MenuItem fx:id="menuItemUsers" mnemonicParsing="false" onAction="#menuItemUsers" text="Users" />
+               <MenuItem fx:id="menuItemEmployees" mnemonicParsing="false" onAction="#menuItemEmployees" text="Employees" />
+               <MenuItem fx:id="menuItemPatients" mnemonicParsing="false" onAction="#menuItemPatients" text="Patients" />
+               <MenuItem fx:id="menuItemAppointments" mnemonicParsing="false" onAction="#menuItemAppointments" text="Appointments" />
+               <MenuItem fx:id="menuItemTreatmentOutcomes" mnemonicParsing="false" onAction="#menuItemTreatmentOutcomes" text="TreatmentOutcomes" />
+               <MenuItem fx:id="menuItemAccountings" mnemonicParsing="false" onAction="#menuItemAccountings" text="Accountings" />
             </items>
           </Menu>
         </menus>

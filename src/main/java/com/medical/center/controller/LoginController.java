@@ -1,6 +1,9 @@
 package com.medical.center.controller;
 
 
+import com.medical.center.employee.model.Employee;
+import com.medical.center.employee.service.EmployeeService;
+import com.medical.center.user.model.User;
 import com.medical.center.user.service.UserService;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,6 +48,9 @@ public class LoginController implements Initializable{
     @Autowired
     private UserService userService;
 
+	@Autowired
+	private EmployeeService employeeService;
+
     @Lazy
     @Autowired
     private StageManager stageManager;
@@ -54,7 +60,21 @@ public class LoginController implements Initializable{
     	try {
 			userService.login(getUsername(), getPassword());
 			log.info("Successful login with email={} and password={}", getUsername(), getPassword());
-			stageManager.switchScene(FxmlView.USER);
+
+			Employee employee = employeeService.getByUserId(userService.getByEmail(getUsername()).getId());
+			switch (employee.getEmployeeType()) {
+				case DOCTOR:
+				case STAFF:
+					stageManager.switchScene(FxmlView.PATIENT);
+					break;
+				case ADMIN:
+					stageManager.switchScene(FxmlView.USER);
+					break;
+				case ACCOUNTANT:
+					stageManager.switchScene(FxmlView.ACCOUNTING);
+					break;
+				default:
+			}
 		} catch (Exception e) {
 			log.warn("Failed login with email={} and password={}", getUsername(), getPassword());
 			lblLogin.setText("Login Failed.");

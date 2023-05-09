@@ -109,6 +109,21 @@ public class EmployeeController implements Initializable {
     @FXML
     private MenuItem menuItemUsers;
 
+    @FXML
+    private MenuItem menuItemPatients;
+
+    @FXML
+    private MenuItem menuItemAppointments;
+
+    @FXML
+    private MenuItem menuItemTreatmentOutcomes;
+
+    @FXML
+    private MenuItem menuItemRooms;
+
+    @FXML
+    private MenuItem menuItemAccountings;
+
 
     @Lazy
     @Autowired
@@ -135,6 +150,30 @@ public class EmployeeController implements Initializable {
         stageManager.switchScene(FxmlView.USER);
     }
 
+    @FXML
+    void menuItemPatients(ActionEvent event) {
+        stageManager.switchScene(FxmlView.PATIENT);
+    }
+
+    @FXML
+    void menuItemAppointments(ActionEvent event) {
+        stageManager.switchScene(FxmlView.APPOINTMENT);
+    }
+
+    @FXML
+    void menuItemTreatmentOutcomes(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TREATMENT_OUTCOMES);
+    }
+
+    @FXML
+    void menuItemRooms(ActionEvent event) {
+        stageManager.switchScene(FxmlView.ROOM);
+    }
+
+    @FXML
+    void menuItemAccountings(ActionEvent event) {
+        stageManager.switchScene(FxmlView.ACCOUNTING);
+    }
 
     @FXML
     void exit(ActionEvent event) {

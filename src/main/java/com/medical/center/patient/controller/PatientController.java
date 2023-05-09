@@ -4,7 +4,6 @@ import com.medical.center.base.constant.ControllerConstant;
 import com.medical.center.base.controller.validation.ControllerValidation;
 import com.medical.center.base.view.FxmlView;
 import com.medical.center.config.StageManager;
-import com.medical.center.employee.model.Employee;
 import com.medical.center.patient.model.Patient;
 import com.medical.center.patient.service.PatientService;
 import java.io.IOException;
@@ -13,10 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,8 +24,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
@@ -107,13 +101,7 @@ public class PatientController implements Initializable {
     private TextField lastName;
 
     @FXML
-    private MenuItem menuItemEmployees;
-
-    @FXML
     private MenuItem menuItemLogout;
-
-    @FXML
-    private MenuItem menuItemUsers;
 
     @FXML
     private Label patientId;
@@ -133,13 +121,6 @@ public class PatientController implements Initializable {
 
     @Autowired
     private PatientService patientService;
-
-    //@Autowired
-    //private PatientViewController patientViewController;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
 
     private ObservableList<Patient> patientList = FXCollections.observableArrayList();
@@ -249,19 +230,6 @@ public class PatientController implements Initializable {
     @FXML
     void getPatientDetails(ActionEvent event) throws IOException {
         Patient patient = patientTable.getSelectionModel().getSelectedItems().get(0);
-/*        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PatientView1.fxml"));
-        root = loader.load();
-
-        //patientViewController.setPatientId(patient.getId());
-
-        //root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
-        stage = new Stage();
-        stage.setUserData(patient.getId().toString());
-        //stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
-
 
         stageManager.switchScene(FxmlView.PATIENT_VIEW, patient);
     }
@@ -272,8 +240,18 @@ public class PatientController implements Initializable {
     }
 
     @FXML
-    void menuItemUsers(ActionEvent event) {
-        stageManager.switchScene(FxmlView.USER);
+    void menuItemPatients(ActionEvent event) {
+        stageManager.switchScene(FxmlView.PATIENT);
+    }
+
+    @FXML
+    void menuItemAppointments(ActionEvent event) {
+        stageManager.switchScene(FxmlView.APPOINTMENT);
+    }
+
+    @FXML
+    void menuItemTreatmentOutcomes(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TREATMENT_OUTCOMES);
     }
 
     @FXML

@@ -95,6 +95,12 @@ public class TreatmentOutcomesController implements Initializable {
     private MenuItem menuItemUsers;
 
     @FXML
+    private MenuItem menuItemPatients;
+
+    @FXML
+    private MenuItem menuItemAppointments;
+
+    @FXML
     private Button refresh;
 
     @FXML
@@ -164,6 +170,16 @@ public class TreatmentOutcomesController implements Initializable {
     @FXML
     void menuItemUsers(ActionEvent event) {
         stageManager.switchScene(FxmlView.USER);
+    }
+
+    @FXML
+    void menuItemPatients(ActionEvent event) {
+        stageManager.switchScene(FxmlView.PATIENT);
+    }
+
+    @FXML
+    void menuItemAppointments(ActionEvent event) {
+        stageManager.switchScene(FxmlView.APPOINTMENT);
     }
 
     @FXML

@@ -69,6 +69,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public Employee getByUserId(Long userId) {
+        log.info("Get employee by userId={}", userId);
+        return employeeRepository.findByUserId(userId).orElse(null);
+    }
+
     public Employee getByFullName(String fullName) {
         log.info("Get employee by fullName={}", fullName);
         String[] substrings = fullName.split(" ");

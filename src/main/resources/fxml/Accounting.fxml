@@ -23,7 +23,6 @@
           <Menu mnemonicParsing="false" text="Pages">
             <items>
               <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#menuItemLogout" text="Logout" />
-              <MenuItem fx:id="menuItemUsers" mnemonicParsing="false" onAction="#menuItemUsers" text="Users" />
             </items>
           </Menu>
         </menus>
