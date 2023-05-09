@@ -1,5 +1,6 @@
 package com.medical.center.employee.service.impl;
 
+import com.medical.center.base.enums.EmployeeType;
 import com.medical.center.employee.model.Employee;
 import com.medical.center.employee.repository.EmployeeRepository;
 import com.medical.center.employee.service.EmployeeService;
@@ -79,6 +80,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.info("Get employee by fullName={}", fullName);
         String[] substrings = fullName.split(" ");
         return employeeRepository.findByFirstNameAndLastName(substrings[1], substrings[0]).orElse(null);
+    }
+
+    @Override
+    public List<Employee> getDoctors() {
+        log.info("Get all doctors");
+        return employeeRepository.findAllByDeletedAtIsNullAndEmployeeType(EmployeeType.DOCTOR);
     }
 
     @Override

@@ -207,7 +207,7 @@ public class AppointmentViewController implements Initializable {
         cbType.setItems(appointmentTypes);
         cbStatus.setItems(appointmentStatus);
         ObservableList<String> employees = FXCollections.observableArrayList(
-            employeeService.getAll().stream().map(Employee::getFullName).collect(Collectors.toList())
+            employeeService.getDoctors().stream().map(Employee::getFullName).collect(Collectors.toList())
         );
         cbEmployee.setItems(employees);
         ObservableList<String> patients = FXCollections.observableArrayList(

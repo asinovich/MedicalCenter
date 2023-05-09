@@ -1,5 +1,6 @@
 package com.medical.center.employee.repository;
 
+import com.medical.center.base.enums.EmployeeType;
 import com.medical.center.employee.model.Employee;
 import java.util.List;
 import java.util.Optional;
@@ -16,4 +17,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Optional<Employee> findByFirstNameAndLastName(String firstName, String lastName);
 
     List<Employee> findAllByDeletedAtIsNull();
+
+    List<Employee> findAllByDeletedAtIsNullAndEmployeeType(EmployeeType employeeType);
 }

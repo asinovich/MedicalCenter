@@ -313,7 +313,7 @@ public class TreatmentOutcomesController implements Initializable {
         treatmentOutcomesTable.setItems(treatmentOutcomesList);
 
         ObservableList<String> employees = FXCollections.observableArrayList(
-            employeeService.getAll().stream().map(Employee::getFullName).collect(Collectors.toList())
+            employeeService.getDoctors().stream().map(Employee::getFullName).collect(Collectors.toList())
         );
         cbEmployee.setItems(employees);
         ObservableList<String> patients = FXCollections.observableArrayList(

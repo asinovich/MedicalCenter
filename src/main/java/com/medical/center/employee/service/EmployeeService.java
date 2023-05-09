@@ -19,5 +19,6 @@ public interface EmployeeService {
 
     Employee getByFullName(String fullName);
 
+    List<Employee> getDoctors();
     List<Employee> getAll();
 }
