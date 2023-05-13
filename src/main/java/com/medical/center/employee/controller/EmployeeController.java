@@ -7,8 +7,10 @@ import com.medical.center.base.view.FxmlView;
 import com.medical.center.config.StageManager;
 import com.medical.center.employee.model.Employee;
 import com.medical.center.employee.service.EmployeeService;
+import com.medical.center.patient.model.Patient;
 import com.medical.center.user.model.User;
 import com.medical.center.user.service.UserService;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -116,6 +118,9 @@ public class EmployeeController implements Initializable {
     private MenuItem menuItemAppointments;
 
     @FXML
+    private MenuItem getEmployeeDetails;
+
+    @FXML
     private MenuItem menuItemTreatmentOutcomes;
 
     @FXML
@@ -189,6 +194,13 @@ public class EmployeeController implements Initializable {
     void reset(ActionEvent event) {
         clearFields();
         loadEmployeeDetails();
+    }
+
+    @FXML
+    void getEmployeeDetails(ActionEvent event) throws IOException {
+        Employee employee = employeeTable.getSelectionModel().getSelectedItems().get(0);
+
+        stageManager.switchScene(FxmlView.EMPLOYEE_VIEW, employee);
     }
 
     @FXML

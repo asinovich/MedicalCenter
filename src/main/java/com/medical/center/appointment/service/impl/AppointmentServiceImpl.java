@@ -62,6 +62,20 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<Appointment> getByEmployeeIdAndDate(Long employeeId, LocalDate date) {
+        log.info("Get all appointments by employeeId={} and date={}", employeeId, date);
+        return appointmentRepository.findByEmployeeId(employeeId).stream()
+            .filter(it -> {
+            if (it.getVisitDateTime().isBefore(LocalDateTime.of(date, LocalTime.MIN))
+                || it.getVisitDateTime().isAfter(LocalDateTime.of(date, LocalTime.MAX))) {
+                return false;
+            } else {
+                return true;
+            }
+        }).collect(Collectors.toList());
+    }
+
+    @Override
     public List<Appointment> getAll() {
         log.info("Get all appointments");
         return appointmentRepository.findAll();

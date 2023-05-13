@@ -26,6 +26,17 @@ public enum FxmlView {
             return "/fxml/Employee.fxml";
         }
     },
+    EMPLOYEE_VIEW {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("employee.details.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/fxml/EmployeeView.fxml";
+        }
+    },
     ROOM {
         @Override
         public String getTitle() {

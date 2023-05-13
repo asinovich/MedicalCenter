@@ -103,6 +103,8 @@ public class AppointmentViewController implements Initializable {
 
     private String patientId;
 
+    private String employeeId;
+
     private ObservableList<AppointmentType> appointmentTypes = FXCollections.observableArrayList(
         Arrays.stream(AppointmentType.values()).collect(Collectors.toList())
     );
@@ -116,6 +118,9 @@ public class AppointmentViewController implements Initializable {
         if (Long.parseLong(patientId) != 0) {
             Patient patient = patientService.getById(Long.parseLong(patientId));
             stageManager.switchScene(FxmlView.PATIENT_VIEW, patient);
+        }  else if (Long.parseLong(employeeId) != 0) {
+            Employee employee = employeeService.getById(Long.parseLong(employeeId));
+            stageManager.switchScene(FxmlView.EMPLOYEE_VIEW, employee);
         } else {
             stageManager.switchScene(FxmlView.APPOINTMENT);
         }
@@ -130,7 +135,8 @@ public class AppointmentViewController implements Initializable {
             String[] strings = stage.getUserData().toString().split(" ");
 
             patientId = strings[0];
-            appointmentId.setText(strings.length > 1 ? strings[1] : null);
+            employeeId = strings[1];
+            appointmentId.setText(strings.length > 2 ? strings[2] : null);
         }
 
         loadAppointmentDetails();

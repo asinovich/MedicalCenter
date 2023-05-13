@@ -19,6 +19,8 @@ public interface AppointmentService {
 
     List<Appointment> getByPatientId(Long patientId);
 
+    List<Appointment> getByEmployeeIdAndDate(Long employeeId,  LocalDate date);
+
     List<Appointment> getAll();
 
     boolean hasEmployeeFreeTime(Long employeeId, LocalDateTime visitDateTime, AppointmentType type, Long appointmentId);

@@ -169,6 +169,9 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
+                      <MenuItem fx:id="getEmployeeDetails" mnemonicParsing="false" onAction="#getEmployeeDetails" text="Get Details" />
+                    </items>
+                    <items>
                       <MenuItem fx:id="softDeletedEmployee" mnemonicParsing="false" onAction="#softDeletedEmployee" text="Soft Delete" />
                     </items>
                     <items>

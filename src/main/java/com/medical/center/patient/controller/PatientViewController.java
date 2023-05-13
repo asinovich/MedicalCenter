@@ -184,12 +184,12 @@ public class PatientViewController implements Initializable {
     void getAppointmentDetails(ActionEvent event) {
         Appointment appointment = appointmentTable.getSelectionModel().getSelectedItems().get(0);
 
-        stageManager.switchScene(FxmlView.APPOINTMENT_VIEW, patientId.getText() + " " + appointment.getId());
+        stageManager.switchScene(FxmlView.APPOINTMENT_VIEW, patientId.getText() + " 0 " + appointment.getId());
     }
 
     @FXML
     void createAppointment(ActionEvent event) {
-        stageManager.switchScene(FxmlView.APPOINTMENT_VIEW, patientId.getText());
+        stageManager.switchScene(FxmlView.APPOINTMENT_VIEW, patientId.getText() + " 0");
     }
 
     @FXML
