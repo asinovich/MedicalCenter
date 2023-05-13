@@ -38,7 +38,7 @@ public class Patient extends BaseEntity<Long> {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "address")
+    @Column(name = "address", length = 500)
     private String address;
 
     @OneToOne

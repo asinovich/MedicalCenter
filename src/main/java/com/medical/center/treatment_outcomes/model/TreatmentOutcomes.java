@@ -33,10 +33,10 @@ public class TreatmentOutcomes extends BaseEntity<Long> {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @Column(name = "diagnosis", nullable = false)
+    @Column(name = "diagnosis", nullable = false, length = 1000)
     private String diagnosis;
 
-    @Column(name = "treatment", nullable = false)
+    @Column(name = "treatment", nullable = false, length = 1000)
     private String treatment;
 
     @Column(name = "date", nullable = false)

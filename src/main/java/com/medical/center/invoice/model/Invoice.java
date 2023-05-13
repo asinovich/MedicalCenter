@@ -27,7 +27,7 @@ public class Invoice extends BaseEntity<Long> {
     @Column(name = "total_coast")
     private BigDecimal totalCoast;
 
-    @Column(name = "note")
+    @Column(name = "note", length = 1000)
     private String note;
 
     @OneToOne

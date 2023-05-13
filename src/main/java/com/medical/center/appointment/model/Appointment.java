@@ -35,7 +35,7 @@ public class Appointment extends BaseEntity<Long> {
     @Column(name = "visit_date_time")
     private LocalDateTime visitDateTime;
 
-    @Column(name = "note")
+    @Column(name = "note", length = 1000)
     private String note;
 
     @Enumerated(EnumType.STRING)
